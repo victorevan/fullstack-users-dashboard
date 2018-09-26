@@ -4,6 +4,7 @@
   "description": "Repo to quickly startup a node server with express",
   "main": "server.js",
   "scripts": {
+    "dbinit": "docker build -t mongocontainer . && docker run -p 27017:27017 -p 28017:28017 mongocontainer",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
   },
