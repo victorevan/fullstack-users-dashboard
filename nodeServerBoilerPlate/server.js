@@ -1,11 +1,13 @@
-const express = require('express')
-const cors = require('cors')
+const express = require('express');
+const cors = require('cors');
+const logger = require('morgan');
 
-const app = express()
+const app = express();
 
-app.use(cors())
+app.use(cors());
+app.use(logger('dev'));
 
-require('./config/middleware')(app, express)
+require('./config/middleware')(app, express);
 
 app.use((req, res, next) => {
 	var err = new Error("Not Found");
@@ -22,4 +24,4 @@ app.use(function(err, req, res, next) {
   });
 });
 
-app.listen(8000, () => console.log('listening on 8000'))
+app.listen(8000, () => console.log('listening on 8000'));
