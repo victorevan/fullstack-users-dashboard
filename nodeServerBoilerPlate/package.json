@@ -11,7 +11,6 @@
   "author": "UniPower",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.14.2",
     "chance": "^1.0.16",
     "cors": "^2.8.4",
     "express": "^4.13.3",

@@ -31,6 +31,8 @@ db.once('open', async () => {
 const app = express();
 
 app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(logger('dev'));
 
 require('./config/middleware')(app, express);

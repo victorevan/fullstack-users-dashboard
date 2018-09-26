@@ -1,11 +1,7 @@
-const bodyParser = require('body-parser')
-
 // NOTE: check out Express Documentation if not familiar with how to setup routes, but a lot is ready for you.
 module.exports = (app, express) => {
   const userRouter = express.Router()
 
-  app.use(bodyParser.urlencoded({extended : true}))
-  app.use(bodyParser.json())
   app.use(express.static(__dirname))
 
   // Add the RESTful URL convention to namespace the User route.
