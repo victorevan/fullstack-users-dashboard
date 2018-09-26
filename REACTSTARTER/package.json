@@ -1,0 +1,79 @@
+{
+  "name": "UniPowerReactAssignment",
+  "version": "1.0.0",
+  "description": "UniPowerReactTest",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "webpack-dev-server --progress --colors --config ./webpack.config.js --host 0.0.0.0",
+    "test": "jest --coverage",
+    "test:watch": "jest --watchAll",
+    "check": "npm run test"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>src/testSetup/setupTests.js",
+    "moduleNameMapper": {
+      "\\.(css|less)$": "<rootDir>/src/testSetup/testMockData/styleMock.js",
+      "^components(.*)$": "<rootDir>/src/components$1",
+      "^testSetup(.*)$": "<rootDir>/src/testSetup$1",
+      "^src(.*)$": "<rootDir>/src$1"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --single-quote --semi=false --jsx-bracket-same-line --print-width 140 --write",
+      "npm run lint"
+    ]
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "babel-polyfill": "^6.26.0",
+    "classnames": "^2.2.3",
+    "core-js": "^1.2.6",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^22.4.2",
+    "lodash": "^4.3.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "regenerator-runtime": "^0.9.5",
+    "semantic-ui-react": "^0.78.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.0.0-beta.41",
+    "@babel/core": "^7.0.0-beta.41",
+    "@babel/plugin-proposal-export-default-from": "^7.0.0-beta.41",
+    "@babel/preset-env": "^7.0.0-beta.41",
+    "@babel/preset-react": "^7.0.0-beta.40",
+    "babel-eslint": "^8.2.1",
+    "babel-loader": "^8.0.0-beta.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "chai": "^3.5.0",
+    "css-loader": "^0.28.9",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.17.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-babel": "^4.1.2",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-react": "^4.3.0",
+    "expect": "^1.14.0",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
+    "jsdom": "^11.6.2",
+    "json-loader": "^0.5.7",
+    "less": "^2.7.2",
+    "less-loader": "^4.0.5",
+    "optimize-css-assets-webpack-plugin": "^3.2.0",
+    "postcss-flexbugs-fixes": "^3.3.0",
+    "postcss-loader": "^2.1.0",
+    "prop-types": "^15.6.0",
+    "react-hot-loader": "^4.0.0",
+    "react-test-renderer": "^16.2.0",
+    "sinon": "^2.0.0-pre",
+    "style-loader": "^0.20.1",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.11.0",
+    "webpack-dev-server": "^2.11.1"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "UniPowernodeserverassignment",
+  "version": "1.0.0",
+  "description": "Repo to quickly startup a node server with express",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "UniPower",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "chance": "^1.0.16",
+    "cors": "^2.8.4",
+    "express": "^4.13.3",
+    "lodash": "^4.17.10"
+  }
+}
