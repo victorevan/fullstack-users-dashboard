@@ -4,6 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const logger = require('morgan');
 
+const apiRoutes = require('./routes/api');
+
 const mongoose = require('mongoose');
 
 const User = require('./models/User');
@@ -34,8 +36,9 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(logger('dev'));
+app.use(express.static(__dirname));
 
-require('./config/middleware')(app, express);
+app.use('/api', apiRoutes);
 
 app.use((req, res, next) => {
 	var err = new Error("Not Found");
