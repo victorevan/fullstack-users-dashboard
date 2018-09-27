@@ -66,6 +66,21 @@ describe('Functional Tests', () => {
             done();
           });
       });
+
+      it('should fail with invalid data', (done) => {
+        chai.request(server)
+          .post('/api/users')
+          .send({
+            invalidProp: ''
+          })
+          .end((err, { status, body }) => {
+            assert.equal(status, 400);
+            assert.property(body, 'error');
+            assert.property(body.error, 'message');
+            assert.typeOf(body.error.message, 'string');
+            done();
+          });
+      });
     });
   });
 
