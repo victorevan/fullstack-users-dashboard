@@ -9,7 +9,10 @@ chai.use(chaiHttp);
 chai.use(chaiJsonSchema);
 
 describe('Functional Tests', () => {
-  const userData = {
+  let userData, userSchema, errorSchema;
+
+  before(() => {
+    userData = {
     name: 'Victor',
     selected: false,
     surveyStatus: 'Scheduled',
@@ -17,9 +20,6 @@ describe('Functional Tests', () => {
     location: 'Las Vegas, NV',
     role: 'Engineer'
   };
-  let userSchema;
-
-  before(() => {
     userSchema = {
       title: 'user schema',
       type: 'object',
@@ -32,6 +32,20 @@ describe('Functional Tests', () => {
         type: { type: 'string' },
         location: { type: 'string' },
         role: { type: 'string' }
+      }
+    };
+    errorSchema = {
+      title: 'error schema',
+      type: 'object',
+      required: ['error'],
+      properties: {
+        error: {
+          type: 'object',
+          required: ['message'],
+          properties: {
+            message: { type: 'string' }
+    }
+        }
       }
     }
   });
@@ -74,9 +88,8 @@ describe('Functional Tests', () => {
           })
           .end((err, { status, body }) => {
             assert.equal(status, 400);
-            assert.property(body, 'error');
-            assert.property(body.error, 'message');
-            assert.typeOf(body.error.message, 'string');
+            assert.jsonSchema(body, errorSchema);
+            assert.include(body.error.message, 'validation failed');
             done();
           });
       });
@@ -110,25 +123,24 @@ describe('Functional Tests', () => {
             done();
           });
       });
+
       it('should return an error if provided invalid ID syntax', (done) => {
         chai.request(server)
           .get('/api/users/invalidId')
           .end((err, { status, body }) => {
             expect(status).to.equal(400);
-            expect(body).to.have.property('error');
-            expect(body.error).to.have.property('message');
+            expect(body).to.be.jsonSchema(errorSchema);
             expect(body.error.message).to.include('invalidId');
             done();
           });
       });
+
       it('should return an error if user not found with valid ID syntax', (done) => {
         chai.request(server)
           .get(`/api/users/${mongoose.Types.ObjectId()}`)
           .end((err, { status, body }) => {
             expect(status).to.equal(404);
-            expect(body).to.have.property('error');
-            expect(body.error).to.have.property('message');
-            expect(body.error.message).to.equal('Not Found');
+            expect(body).to.be.jsonSchema(errorSchema);
             done();
           });
       });
