@@ -245,6 +245,13 @@ chai-http@^4.2.0:
     qs "^6.5.1"
     superagent "^3.7.0"
 
+chai-json-schema@^1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/chai-json-schema/-/chai-json-schema-1.5.0.tgz#6960719e40f71fd5b377c9282e5c9a46799474f6"
+  dependencies:
+    jsonpointer.js "0.4.0"
+    tv4 "~1.2.7"
+
 chai@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/chai/-/chai-4.2.0.tgz#760aa72cf20e3795e84b12877ce0e83737aa29e5"
@@ -1066,6 +1073,10 @@ isobject@^2.0.0:
 isobject@^3.0.0, isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
+
+jsonpointer.js@0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/jsonpointer.js/-/jsonpointer.js-0.4.0.tgz#002cb123f767aafdeb0196132ce5c4f9941ccaba"
 
 kareem@2.2.1:
   version "2.2.1"
@@ -2005,6 +2016,10 @@ touch@^3.1.0:
   resolved "https://registry.yarnpkg.com/touch/-/touch-3.1.0.tgz#fe365f5f75ec9ed4e56825e0bb76d24ab74af83b"
   dependencies:
     nopt "~1.0.10"
+
+tv4@~1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/tv4/-/tv4-1.2.7.tgz#bd29389afc73ade49ae5f48142b5d544bf68d120"
 
 type-detect@^4.0.0, type-detect@^4.0.5:
   version "4.0.8"
