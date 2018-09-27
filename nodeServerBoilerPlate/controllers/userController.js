@@ -14,8 +14,7 @@ exports.create_user = async (req, res, next) => {
 
   try {
     const userDoc = await user.save();
-    res.status(201);
-    res.json(userDoc);
+    res.status(201).json(userDoc);
   } catch(err) {
     err.status = 400;
     next(err);
