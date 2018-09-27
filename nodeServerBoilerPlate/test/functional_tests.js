@@ -3,6 +3,7 @@ const chaiJsonSchema = require('chai-json-schema');
 const server = require('../server');
 const chai = require('chai');
 const { assert, expect } = chai;
+const mongoose = require('mongoose');
 
 chai.use(chaiHttp);
 chai.use(chaiJsonSchema);
@@ -97,9 +98,40 @@ describe('Functional Tests', () => {
     });
     
     describe('GET', () => {
-      it('should return the correct user doc');
-      it('should return an error if provided invalid ID syntax');
-      it('should return an error if user not found with valid ID syntax');
+      it('should return the correct user doc', (done) => {
+        chai.request(server)
+          .get(`/api/users/${userId}`)
+          .end((err, { status, body }) => {
+            expect(status).to.equal(200);
+            expect(body).to.be.jsonSchema(userSchema);
+            for (let property in userData) {
+              expect(body[property]).to.be.equal(userData[property]);
+            }
+            done();
+          });
+      });
+      it('should return an error if provided invalid ID syntax', (done) => {
+        chai.request(server)
+          .get('/api/users/invalidId')
+          .end((err, { status, body }) => {
+            expect(status).to.equal(400);
+            expect(body).to.have.property('error');
+            expect(body.error).to.have.property('message');
+            expect(body.error.message).to.include('invalidId');
+            done();
+          });
+      });
+      it('should return an error if user not found with valid ID syntax', (done) => {
+        chai.request(server)
+          .get(`/api/users/${mongoose.Types.ObjectId()}`)
+          .end((err, { status, body }) => {
+            expect(status).to.equal(404);
+            expect(body).to.have.property('error');
+            expect(body.error).to.have.property('message');
+            expect(body.error.message).to.equal('Not Found');
+            done();
+          });
+      });
     });
 
     describe('PUT', () => {
