@@ -85,9 +85,39 @@ describe('Functional Tests', () => {
   });
 
   // BDD style
-  xdescribe('API ROUTING FOR /api/users/:userId', () => {
-    xdescribe('GET');
-    xdescribe('PUT');
-    xdescribe('DELETE');
+  describe('API ROUTING FOR /api/users/:userId', () => {
+    let userId;
+
+    before((done) => {
+      chai.request(server)
+        .post('/api/users')
+        .send({
+          name: 'Test User',
+          selected: false,
+          surveyStatus: 'Scheduled',
+          type: 'Candidate',
+          location: 'Las Vegas, NV',
+          role: 'Engineer'
+        })
+        .end((err, { body }) => {
+          userId = body._id;
+          done();
+        });
+    });
+    
+    describe('GET', () => {
+      it('should return the correct user doc');
+      it('should return an error if provided invalid ID syntax');
+      it('should return an error if user not found with valid ID syntax');
+    });
+
+    describe('PUT', () => {
+      it('should handle updating any user property');
+      it('should not be able to update _id');
+    });
+
+    describe('DELETE', () => {
+      it('should handle removing a user');
+    });
   });
 });
