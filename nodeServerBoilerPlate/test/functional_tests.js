@@ -31,7 +31,7 @@ describe('Functional Tests', () => {
     describe('POST', () => {
       it('create new user', (done) => {
         chai.request(server)
-          .get('/api/users')
+          .post('/api/users')
           .end((err, res) => {
             assert.equal(res.status, 200);
             done();
