@@ -16,18 +16,16 @@ const db = mongoose.connection;
 
 db.on('error', err => console.error(`connection error: ${err}`) );
 db.once('open', async () => {
+  const _errorLogger = (err, successMessage) => err ? console.error(err) : console.log(successMessage);
   console.log('db connection successful');
-  await User.deleteMany(err => err ? console.error(err) : console.log('all user docs deleted'));
+  await User.deleteMany(err => _errorLogger(err, 'all user docs deleted'));
   
   const initialData = makeData();
-  const duplicateUserData = 
+  const duplicateUserData =
     [...initialData, initialData]
     .map(user => new User(user));
 
-  User.collection.insertMany(duplicateUserData, (err) => {
-    if (err) console.error(err);
-    else console.log('users inserted');
-  });
+  User.collection.insertMany(duplicateUserData, err => _errorLogger(err, 'users inserted'));
 });
 
 const app = express();
@@ -56,4 +54,6 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(8000, () => console.log('listening on 8000'));
+
+// test export
 module.exports = app;
