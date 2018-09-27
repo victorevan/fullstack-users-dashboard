@@ -13,13 +13,13 @@ describe('Functional Tests', () => {
 
   before(() => {
     userData = {
-    name: 'Victor',
-    selected: false,
-    surveyStatus: 'Scheduled',
-    type: 'Candidate',
-    location: 'Las Vegas, NV',
-    role: 'Engineer'
-  };
+      name: 'Victor',
+      selected: false,
+      surveyStatus: 'Scheduled',
+      type: 'Candidate',
+      location: 'Las Vegas, NV',
+      role: 'Engineer'
+    };
     userSchema = {
       title: 'user schema',
       type: 'object',
@@ -44,7 +44,7 @@ describe('Functional Tests', () => {
           required: ['message'],
           properties: {
             message: { type: 'string' }
-    }
+          }
         }
       }
     }
@@ -147,8 +147,55 @@ describe('Functional Tests', () => {
     });
 
     describe('PUT', () => {
-      it('should handle updating any user property');
-      it('should not be able to update _id');
+      let updatedUserData, updateSchema;
+
+      before(() => {
+        updatedUserData = {
+          name: 'New Name',
+          selected: true,
+          surveyStatus: 'completed',
+          type: 'Employee',
+          location: 'San Francisco, CA',
+          role: 'Lead Software Engineer'
+        };
+        updateSchema = {
+          title: 'update schema',
+          type: 'object',
+          required: ['n', 'nModified', 'ok'],
+          properties: {
+            n: { type: 'number' },
+            nModified: { type: 'number' },
+            ok: { type: 'number' }
+          }
+        }
+      });
+
+      it('should handle updating any user property', (done) => {
+        chai.request(server)
+          .put(`/api/users/${userId}`)
+          .send(updatedUserData)
+          .end((err, { status, body }) => {
+            expect(status).to.equal(200);
+            expect(body).to.be.jsonSchema(updateSchema);
+            for (let property in body) {
+              expect(body[property]).to.equal(1);
+            }
+            done();
+          });
+      });
+      it('should not be able to update immutable _id', (done) => {
+        chai.request(server)
+          .put(`/api/users/${userId}`)
+          .send({
+            _id: mongoose.Types.ObjectId()
+          })
+          .end((err, { status, body }) => {
+            expect(status).to.equal(400);
+            expect(body).to.have.property('error');
+            expect(body.error.message).to.include('immutable');
+            done();
+          });
+      });
     });
 
     describe('DELETE', () => {
