@@ -199,7 +199,25 @@ describe('Functional Tests', () => {
     });
 
     describe('DELETE', () => {
-      it('should handle removing a user');
+      it('should return doc that was deleted', (done) => {
+        chai.request(server)
+          .delete(`/api/users/${userId}`)
+          .end((err, { status, body }) => {
+            expect(status).to.equal(200);
+            expect(body).to.be.jsonSchema(userSchema);
+            done();
+          });
+      });
+      it('should fail to find deleted doc', (done) => {
+        chai.request(server)
+          .get(`/api/users/${userId}`)
+          .end((err, { status, body }) => {
+            expect(status).to.equal(404);
+            expect(body).to.be.jsonSchema(errorSchema);
+            expect(body.error.message).to.equal('Not Found');
+            done();
+          })
+      })
     });
   });
 });
