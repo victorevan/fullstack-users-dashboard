@@ -8,6 +8,14 @@ chai.use(chaiHttp);
 chai.use(chaiJsonSchema);
 
 describe('Functional Tests', () => {
+  const userData = {
+    name: 'Victor',
+    selected: false,
+    surveyStatus: 'Scheduled',
+    type: 'Candidate',
+    location: 'Las Vegas, NV',
+    role: 'Engineer'
+  };
   let userSchema;
 
   before(() => {
@@ -46,23 +54,13 @@ describe('Functional Tests', () => {
       it('create new user', (done) => {
         chai.request(server)
           .post('/api/users')
-          .send({
-            name: 'Victor',
-            selected: false,
-            surveyStatus: 'Scheduled',
-            type: 'Candidate',
-            location: 'Las Vegas, NV',
-            role: 'Engineer'
-          })
+          .send(userData)
           .end((err, { status, body }) => {
             assert.equal(status, 201);
             assert.jsonSchema(body, userSchema);
-            assert.equal(body.name, 'Victor');
-            assert.equal(body.selected, false);
-            assert.equal(body.surveyStatus, 'Scheduled');
-            assert.equal(body.type, 'Candidate');
-            assert.equal(body.location, 'Las Vegas, NV');
-            assert.equal(body.role, 'Engineer');
+            for (let property in userData) {
+              assert.equal(body[property], userData[property]);
+            }
             done();
           });
       });
