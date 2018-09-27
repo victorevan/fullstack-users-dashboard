@@ -5,8 +5,8 @@
   "main": "server.js",
   "scripts": {
     "dbinit": "docker build -t mongocontainer . && docker run -p 27017:27017 -p 28017:28017 mongocontainer",
-    "test": "mocha",
-    "test:watch": "mocha --watch ./test ./",
+    "test": "PORT=4241 mocha",
+    "test:watch": "PORT=4242 nodemon --exec \"mocha\"",
     "start": "nodemon server.js"
   },
   "author": "UniPower",
@@ -23,7 +23,6 @@
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
     "mocha": "^5.2.0",
-    "nodemon": "^1.18.4",
-    "port-used": "^2.0.5"
+    "nodemon": "^1.18.4"
   }
 }

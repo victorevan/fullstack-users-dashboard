@@ -1,21 +1,11 @@
 const chaiHttp = require('chai-http');
+const server = require('../server');
 const chai = require('chai');
 const { assert } = chai;
 
 chai.use(chaiHttp);
 
 describe('Functional Tests', () => {
-  let server;
-
-  beforeEach(() => {
-    server = require('../server', { bustCache: true });
-  });
-
-  afterEach((done) => {
-    server.close();
-    done();
-  });
-
   describe('API ROUTING FOR /api/users', () => {
     describe('GET', () => {
       it('get array of users', (done) => {
@@ -23,6 +13,7 @@ describe('Functional Tests', () => {
           .get('/api/users')
           .end((err, res) => {
             assert.equal(res.status, 200);
+            assert.isArray(res.body);
             done();
           });
       });
@@ -32,6 +23,14 @@ describe('Functional Tests', () => {
       it('create new user', (done) => {
         chai.request(server)
           .post('/api/users')
+          .send({
+            selected: false,
+            name: 'Victor',
+            surveyStatus: 'Scheduled',
+            type: 'Candidate',
+            location: 'Las Vegas, NV',
+            role: 'Engineer'
+          })
           .end((err, res) => {
             assert.equal(res.status, 200);
             done();

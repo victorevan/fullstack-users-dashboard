@@ -1,7 +1,6 @@
 'use strict';
 
 const express = require('express');
-const portUsed = require('port-used');
 const cors = require('cors');
 const logger = require('morgan');
 
@@ -56,11 +55,6 @@ app.use(function(err, req, res, next) {
 
 let port = process.env.PORT || 8000;
 
-portUsed.check(port)
-  .then(inUse => {
-    if (inUse) port += 1;
-    const server = app.listen(port, () => console.log(`listening on ${port}`));
+const server = app.listen(port, () => console.log(`listening on ${port}`));
 
-    module.exports = server;
-  })
-  .catch(err => console.error(err));
+module.exports = server;
