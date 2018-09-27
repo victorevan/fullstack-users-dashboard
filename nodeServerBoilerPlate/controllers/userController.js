@@ -1,11 +1,25 @@
 const User = require('../models/User');
 
-exports.read_user_list = (req, res) => {
-
+exports.read_user_list = async (req, res, next) => {
+  try {
+    const allUsers = await User.find().exec();
+    res.json(allUsers);
+  } catch(err) {
+    next(err);
+  }
 };
 
-exports.create_user = (req, res) => {
+exports.create_user = async (req, res, next) => {
+  const user = new User(req.body);
 
+  try {
+    const userDoc = await user.save();
+    res.status(201);
+    res.json(userDoc);
+  } catch(err) {
+    err.status = 400;
+    next(err);
+  }
 };
 
 exports.preload_user_doc = (req, res, next, userId) => {
