@@ -2,8 +2,8 @@ const User = require('../models/User');
 
 exports.read_user_list = async (req, res, next) => {
   try {
-    const allUsers = await User.find().exec();
-    res.json(allUsers);
+    const allUserDocs = await User.find().exec();
+    res.json(allUserDocs);
   } catch(err) {
     next(err);
   }
