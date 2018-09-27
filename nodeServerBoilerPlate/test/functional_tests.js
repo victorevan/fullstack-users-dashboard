@@ -89,14 +89,7 @@ describe('Functional Tests', () => {
     before((done) => {
       chai.request(server)
         .post('/api/users')
-        .send({
-          name: 'Test User',
-          selected: false,
-          surveyStatus: 'Scheduled',
-          type: 'Candidate',
-          location: 'Las Vegas, NV',
-          role: 'Engineer'
-        })
+        .send(userData)
         .end((err, { body }) => {
           userId = body._id;
           done();
