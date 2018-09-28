@@ -14,7 +14,7 @@ const cssFilename = 'static/css/[name].css'
 // Default config
 let devtool = ''
 
-let entry = { bundle: ['babel-polyfill', 'whatwg-fetch', 'react-hot-loader/patch', './src/index.js'] }
+let entry = { bundle: ['@babel/polyfill', 'whatwg-fetch', 'react-hot-loader/patch', './src/index.js'] }
 
 let output = {
   path: path.join(__dirname, 'dist'),
@@ -30,7 +30,7 @@ switch (TARGET) {
     devtool = 'cheap-module-eval-source-map'
     break
   case 'test':
-    entry = ['./test/spec/index.js']
+    entry = ['@babel/polyfill', './test/spec/index.js']
     output = {
       filename: 'test.bundle.js',
       path: 'dist/',
