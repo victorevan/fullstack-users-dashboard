@@ -1,3 +1,5 @@
+'use strict';
+
 const User = require('../models/User');
 
 exports.read_user_list = async (req, res, next) => {
