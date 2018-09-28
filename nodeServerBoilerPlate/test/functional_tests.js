@@ -1,3 +1,5 @@
+'use strict';
+
 const chaiHttp = require('chai-http');
 const chaiJsonSchema = require('chai-json-schema');
 const server = require('../server');
