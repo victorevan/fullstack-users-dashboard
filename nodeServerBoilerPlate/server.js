@@ -22,7 +22,7 @@ db.once('open', async () => {
   
   const initialData = makeData();
   const duplicateUserData =
-    [...initialData, initialData]
+    [...initialData, ...initialData]
     .map(user => new User(user));
 
   User.collection.insertMany(duplicateUserData, err => _errorLogger(err, 'users inserted'));
