@@ -10,6 +10,7 @@
     "check": "npm run test"
   },
   "jest": {
+    "testURL": "http://localhost/",
     "setupTestFrameworkScriptFile": "<rootDir>src/testSetup/setupTests.js",
     "transform": {
       "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
