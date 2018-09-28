@@ -27,4 +27,4 @@ const mapDispatchToProps = dispatch => ({
   loadInitialData: () => dispatch(handleInitialData()),
 });
 
-export default connect(() => {}, mapDispatchToProps)(App);
+export default connect(() => ({}), mapDispatchToProps)(App);
