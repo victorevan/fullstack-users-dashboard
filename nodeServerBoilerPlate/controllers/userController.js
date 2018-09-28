@@ -27,7 +27,7 @@ exports.preload_user_doc = async (req, res, next, userId) => {
   try {
     const userDoc = await User.findById(userId).exec();
     if (!userDoc) {
-      err = new Error("Not Found");
+      const err = new Error("Not Found");
       err.status = 404;
       return next(err);
     }
