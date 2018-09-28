@@ -1,18 +1,30 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
-// import './styles.less' -> here if you want to use it.
-
-const serverBaseUrl = 'http://localhost:8000'
+import handleInitialData from '../../thunk/handleInitialData';
 
 class App extends Component {
+  static propTypes = {
+    loadInitialData: PropTypes.func.isRequired,
+  };
+
+  componentDidMount() {
+    const { loadInitialData } = this.props;
+    loadInitialData();
+  }
+
   render() {
     return (
       <div className="app">
-        {/* YOUR CODE GOES HERE */}
         Once you add some code here I am sure this will look a heck of a lot better.
       </div>
-    )
+    );
   }
 }
 
-export default App
+const mapDispatchToProps = dispatch => ({
+  loadInitialData: () => dispatch(handleInitialData()),
+});
+
+export default connect(() => {}, mapDispatchToProps)(App);
