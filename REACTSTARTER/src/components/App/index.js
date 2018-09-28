@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 
 // import './styles.less' -> here if you want to use it.
 
