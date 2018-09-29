@@ -2,6 +2,7 @@
 
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const mongoosePaginate = require('mongoose-paginate');
 
 const UserSchema = new Schema({
   // built-in id omitted, _id indexed/more performant
@@ -12,5 +13,7 @@ const UserSchema = new Schema({
   location: { type: String, required: true },
   role: { type: String, required: true }
 });
+
+UserSchema.plugin(mongoosePaginate);
 
 module.exports = mongoose.model('User', UserSchema);
