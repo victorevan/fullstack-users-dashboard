@@ -5,6 +5,7 @@ import allUsersSchema from './allUsersSchema';
 import { getInitialData } from '../utils/api';
 import { receiveUsers } from './users';
 
+// normalized data example - not used for the sake of reducing complexity
 export default () => async (dispatch) => {
   dispatch(showLoading);
   const users = await getInitialData();
