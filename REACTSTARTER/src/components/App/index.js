@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import handleInitialData from '../../thunk/handleInitialData';
+import handleInitialData from '../../actions/shared';
 
 class App extends Component {
   static propTypes = {
