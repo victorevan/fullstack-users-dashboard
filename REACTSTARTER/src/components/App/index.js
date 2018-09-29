@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Container } from 'semantic-ui-react';
+import { Switch, Route } from 'react-router-dom';
 
 import handleInitialData from '../../actions/shared';
+
+import Home from '../Home';
 
 class App extends Component {
   static propTypes = {
@@ -16,9 +20,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app">
-        Once you add some code here I am sure this will look a heck of a lot better.
-      </div>
+      <Container>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route render={() => <h1>Not Found</h1>} />
+        </Switch>
+      </Container>
     );
   }
 }
