@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
 const User = require('./models/User');
 const makeData = require('./config/users');
 
-const { filterDuplicatesBy } = require('./utils/helpers');
+const { filterDuplicatesBy } = require('./config/helpers');
 
 mongoose.connect('mongodb://localhost:27017/unipower', { useNewUrlParser: true });
 const db = mongoose.connection;
