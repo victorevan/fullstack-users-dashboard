@@ -42,7 +42,10 @@ class Dashboard extends Component {
 
   handlePaginationChange = (e, { activePage }) => {
     const { loadPaginatedData } = this.props;
-    loadPaginatedData({ page: activePage });
+    const { page } = this.state;
+    if (activePage !== page) {
+      loadPaginatedData({ page: activePage });
+    }
   }
 
   render() {
