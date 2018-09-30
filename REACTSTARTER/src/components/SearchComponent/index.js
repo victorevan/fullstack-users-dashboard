@@ -10,7 +10,7 @@ const options = [
 const SearchComponent = () => (
   <Input type="text" placeholder="Search by..." action>
     <input />
-    <Select compact options={options} defaultValue="name" />
+    <Select options={options} defaultValue="name" />
     <Button type="submit">Search</Button>
   </Input>
 );

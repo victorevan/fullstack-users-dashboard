@@ -1,8 +1,9 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
-import { Table, Menu, Icon } from 'semantic-ui-react';
+import PropTypes from 'prop-types';
+import { Table, Pagination, Menu, Icon } from 'semantic-ui-react';
 
-const tableData = [
+const data = [
   {
     _id: '5baec89bf9d88f43d805e40b',
     name: 'Victor',
@@ -23,48 +24,23 @@ const tableData = [
   },
 ];
 
-export default class TableComponent extends Component {
-  state = {
-    column: null,
-    data: tableData,
-    direction: null,
-  }
-
-  handleSort = clickedColumn => () => {
-    const { column, data, direction } = this.state;
-
-    if (column !== clickedColumn) {
-      this.setState({
-        column: clickedColumn,
-        data: _.sortBy(data, [clickedColumn]),
-        direction: 'ascending',
-      });
-
-      return;
-    }
-
-    this.setState({
-      data: data.reverse(),
-      direction: direction === 'ascending' ? 'descending' : 'ascending',
-    });
-  }
+class TableComponent extends Component {
 
   render() {
     const tableHeaderKeys = [
-      '_id', 'name', 'role', 'location', 'type', 'surveyStatus', 'selected',
+      'Role', 'Location', 'Type', 'Survey Status', 'Selected',
     ];
-    const { column, data, direction } = this.state;
 
     return (
       <Table sortable celled>
         <Table.Header>
           <Table.Row>
+            <Table.HeaderCell>ID</Table.HeaderCell>
+            <Table.HeaderCell>
+              Name
+            </Table.HeaderCell>
             {tableHeaderKeys.map(headerKey => (
-              <Table.HeaderCell
-                key={headerKey}
-                sorted={column === headerKey ? direction : null}
-                onClick={this.handleSort(headerKey)}
-              >
+              <Table.HeaderCell key={headerKey}>
                 {headerKey}
               </Table.HeaderCell>
             ))}
@@ -86,24 +62,11 @@ export default class TableComponent extends Component {
           ))}
         </Table.Body>
         <Table.Footer>
-          <Table.Row>
-            <Table.HeaderCell colSpan={tableHeaderKeys.length}>
-              <Menu floated='right' pagination>
-                <Menu.Item as='a' icon>
-                  <Icon name='chevron left' />
-                </Menu.Item>
-                <Menu.Item as='a'>1</Menu.Item>
-                <Menu.Item as='a'>2</Menu.Item>
-                <Menu.Item as='a'>3</Menu.Item>
-                <Menu.Item as='a'>4</Menu.Item>
-                <Menu.Item as='a' icon>
-                  <Icon name='chevron right' />
-                </Menu.Item>
-              </Menu>
-            </Table.HeaderCell>
-          </Table.Row>
+          {/* <Pagination /> */}
         </Table.Footer>
       </Table>
-    )
+    );
   }
 }
+
+export default TableComponent;
