@@ -4,7 +4,7 @@
   "description": "UniPowerReactTest",
   "main": "src/index.js",
   "scripts": {
-    "start": "webpack-dev-server --progress --colors --config ./webpack.config.js --host 0.0.0.0",
+    "start": "webpack-dev-server --progress --colors --config ./webpack.config.js --host 0.0.0.0 --mode development",
     "test": "jest --coverage",
     "test:watch": "jest --watchAll",
     "check": "npm run test"
@@ -90,7 +90,8 @@
     "sinon": "^2.0.0-pre",
     "style-loader": "^0.20.1",
     "url-loader": "^0.6.2",
-    "webpack": "^3.11.0",
-    "webpack-dev-server": "^2.11.1"
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.2",
+    "webpack-dev-server": "^3.1.9"
   }
 }
