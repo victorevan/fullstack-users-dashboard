@@ -6,6 +6,6 @@ const userSchema = new schema.Entity(
   { idAttribute: '_id' },
 );
 
-const allUsersSchema = new schema.Array(userSchema);
+const usersSchema = new schema.Array(userSchema);
 
-export default allUsersSchema;
+export default usersSchema;

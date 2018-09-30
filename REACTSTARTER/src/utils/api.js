@@ -2,10 +2,17 @@ const serverBaseUrl = 'http://localhost:8000';
 
 /* eslint-disable no-undef */
 
-export async function getInitialData() {
+// unused, but still an option
+export async function getAllUserData() {
   const response = await fetch(`${serverBaseUrl}/api/users`);
   const usersArray = await response.json();
   return usersArray;
+}
+
+export async function getPaginationData() {
+  const response = await fetch(`${serverBaseUrl}/api/users/paginated`);
+  const paginationData = await response.json();
+  return paginationData;
 }
 
 export async function saveUser(user) {
