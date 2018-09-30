@@ -18,8 +18,8 @@ class Dashboard extends Component {
   }
 
   handleSearch = ({ target }) => {
-    const letter = target.value;
-    this.setState({ search: letter }, () => {
+    const { value } = target;
+    this.setState({ search: value }, () => {
       const { loadPaginatedData } = this.props;
       const { search, currentFilter, isCustomSearching } = this.state;
       const trimmedSearch = search.trim();
