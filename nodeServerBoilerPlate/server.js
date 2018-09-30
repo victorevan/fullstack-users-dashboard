@@ -11,6 +11,8 @@ const mongoose = require('mongoose');
 const User = require('./models/User');
 const makeData = require('./config/users');
 
+const { filterDuplicatesBy } = require('./utils/helpers');
+
 mongoose.connect('mongodb://localhost:27017/unipower', { useNewUrlParser: true });
 const db = mongoose.connection;
 
@@ -21,11 +23,12 @@ db.once('open', async () => {
   await User.deleteMany(err => _errorLogger(err, 'all user docs deleted'));
   
   const initialData = makeData();
-  const duplicateUserData =
-    [...initialData, ...initialData]
-    .map(user => new User(user));
+  const duplicateUserData = [...initialData, ...initialData];
+  console.log('duplicate users created');
+  
+  const filteredData = filterDuplicatesBy(duplicateUserData, 'name').map(user => new User(user));
 
-  User.collection.insertMany(duplicateUserData, err => _errorLogger(err, 'users inserted'));
+  User.collection.insertMany(filteredData, err => _errorLogger(err, 'filtered users inserted'));
 });
 
 const app = express();
