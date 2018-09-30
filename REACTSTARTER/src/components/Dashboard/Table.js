@@ -12,7 +12,7 @@ const Table = ({
       <SUITable.Row>
         <SUITable.HeaderCell>ID</SUITable.HeaderCell>
         <SUITable.HeaderCell>Name</SUITable.HeaderCell>
-        {['role', 'location', 'type', 'surveyStatus', 'selected']
+        {['role', 'location', 'type', 'surveyStatus']
           .map(title => (
             <SUITable.HeaderCell key={title}>
               {to.title(title)}
@@ -22,7 +22,7 @@ const Table = ({
     </SUITable.Header>
     <SUITable.Body>
       {users.map(({
-        _id: id, name, role, location, type, surveyStatus, selected,
+        _id: id, name, role, location, type, surveyStatus,
       }) => (
         <SUITable.Row key={id}>
           <SUITable.Cell>{id}</SUITable.Cell>
@@ -31,7 +31,6 @@ const Table = ({
           <SUITable.Cell>{location}</SUITable.Cell>
           <SUITable.Cell>{type}</SUITable.Cell>
           <SUITable.Cell>{surveyStatus}</SUITable.Cell>
-          <SUITable.Cell>{selected ? 'selected' : 'not selected'}</SUITable.Cell>
         </SUITable.Row>
       ))}
     </SUITable.Body>

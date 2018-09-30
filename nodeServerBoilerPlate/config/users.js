@@ -17,7 +17,7 @@ const _newPerson = () => {
   const statusChance = Math.random()
   return {
     id: Math.round(Math.random() * (1000 - 10) + 10),
-    selected: false,
+    // selected: false, (never used)
     name: chance.name(),
     surveyStatus: statusChance > 0.66 ? 'Pending' : statusChance > 0.33 ? 'Completed' : 'Scheduled',
     type: statusChance > 0.51 ? 'Candidate' : 'Employee',
