@@ -1,3 +1,5 @@
+import queryString from 'query-string';
+
 const serverBaseUrl = 'http://localhost:8000';
 
 /* eslint-disable no-undef */
@@ -9,8 +11,12 @@ export async function getAllUserData() {
   return usersArray;
 }
 
-export async function getPaginationData() {
-  const response = await fetch(`${serverBaseUrl}/api/users/paginated`);
+export async function getPaginationData(queries = null) {
+  let queryOptions = '';
+  if (queries !== null) {
+    queryOptions = queryString.stringify(queries);
+  }
+  const response = await fetch(`${serverBaseUrl}/api/users/paginated?${queryOptions}`);
   const paginationData = await response.json();
   return paginationData;
 }

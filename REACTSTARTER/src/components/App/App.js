@@ -3,7 +3,7 @@ import { Container } from 'semantic-ui-react';
 import { Switch, Route } from 'react-router-dom';
 import LoadingBar from 'react-redux-loading';
 
-import Dashboard from '../Dashboard';
+import Dashboard from '../Dashboard/Dashboard';
 
 const App = () => (
   <Container>

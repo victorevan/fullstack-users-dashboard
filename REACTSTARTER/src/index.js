@@ -13,7 +13,7 @@ const store = createStore(
 
 /* eslint-disable */
 
-import App from 'components/App';
+import App from './components/App/';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -24,6 +24,8 @@ ReactDOM.render(
   document.getElementById('app'),
 );
 
-module.hot.accept();
+if (module.hot) {
+  module.hot.accept();
+}
 
 /* eslint-enable */

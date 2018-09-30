@@ -1,6 +1,6 @@
 /* eslint-disable */
 
-// filter duplicates by property
+// NOT USED WHEN PAGINATING - filter duplicates by property - useful when you get ALL users at once
 export function filterDuplicatesBy(arr, prop) {
   // begin filtering
   return arr.filter((obj, i, arrRef) => arrRef
