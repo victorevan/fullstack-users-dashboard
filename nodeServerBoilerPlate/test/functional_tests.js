@@ -16,7 +16,6 @@ describe('Functional Tests', () => {
   before(() => {
     userData = {
       name: 'Victor',
-      selected: false,
       surveyStatus: 'Scheduled',
       type: 'Candidate',
       location: 'Las Vegas, NV',
@@ -25,10 +24,9 @@ describe('Functional Tests', () => {
     userSchema = {
       title: 'user schema',
       type: 'object',
-      required: ['name', 'selected', 'surveyStatus', 'type', 'location', 'role'],
+      required: ['name', 'surveyStatus', 'type', 'location', 'role'],
       properties: {
         ['_id']: { type: 'string' },
-        selected: { type: 'boolean' },
         name: { type: 'string' },
         surveyStatus: { type: 'string' },
         type: { type: 'string' },

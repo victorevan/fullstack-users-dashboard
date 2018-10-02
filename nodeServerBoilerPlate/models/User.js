@@ -6,7 +6,6 @@ const mongoosePaginate = require('mongoose-paginate');
 
 const UserSchema = new Schema({
   // built-in id omitted, _id indexed/more performant
-  selected: { type: Boolean, required: true },
   name: { type: String, required: true },
   surveyStatus: { type: String, required: true },
   type: { type: String, required: true },
