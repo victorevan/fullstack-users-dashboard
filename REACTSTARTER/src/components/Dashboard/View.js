@@ -7,7 +7,10 @@ import Table from './Table';
 import Pagination from './Pagination';
 
 const Dashboard = styled.div`
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: shrink;
 `;
 
 const View = ({
