@@ -9,14 +9,14 @@ const CenteredPagination = styled(SUIPagination)`
 `;
 
 const Pagination = ({
-  changePage, page, pages, total,
+  changePage, page, pages, total, limit
 }) => (
-  <SUIPagination
+  <CenteredPagination
     onPageChange={changePage}
     firstItem={false}
     lastItem={false}
     prevItem={page !== 1 ? undefined : null}
-    nextItem={page !== total ? undefined : null}
+    nextItem={page !== (total / limit) ? undefined : null}
     boundaryRange={1}
     siblingRange={1}
     activePage={page}
@@ -29,6 +29,7 @@ Pagination.propTypes = {
   page: PropTypes.number.isRequired,
   pages: PropTypes.number.isRequired,
   total: PropTypes.number.isRequired,
+  limit: PropTypes.number.isRequired,
 };
 
 export default Pagination;
