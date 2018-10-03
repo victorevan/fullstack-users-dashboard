@@ -1,5 +1,5 @@
 {
-  "name": "UniPowernodeserverassignment",
+  "name": "full-stack-users-dashboard-server",
   "version": "1.0.0",
   "description": "Repo to quickly startup a node server with express",
   "main": "server.js",
