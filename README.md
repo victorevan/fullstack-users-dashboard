@@ -84,7 +84,7 @@ The `getPaginationData` function can be found at `/client/src/utils/api.js`. It 
 
 The `paginatedUsers` function is located at `/client/src/reducers/paginatedUsers.js`. It is a pure function, or in Redux terms a reducer that simply checks the type of action sent (`RECEIVE_PAGINATED_DATA`), and returns a new state with the pagination data included on the action object.
 
-# On the subject of ensuring no duplicates appear
+### On the subject of ensuring no duplicates appear
 
 Initially, I filtered the duplicate user files on the front end. The utility helper function used for this is located at `/client/src/utils/helpers.js`. It is called `filterDuplicatesBy`. It filters an array of objects by a property. The property I used was the `name` property in order to remove duplicate users.
 
