@@ -62,7 +62,7 @@ The database can be initialized by running `sudo yarn db-start`.
 I used the following main technologies: React, Redux, Redux Thunk, React-Redux, Normalizr,
 React Router 4, Connected React Router, Styled Components, Semantic UI React, and ESLint.
 
-I updated the React Starter configuration to use Webpack 4 and Babel 7 up from Webpack 6
+I updated the React Starter configuration to use Webpack 4 and Babel 7 up from Webpack 3
 and Babel 6. Webpack Hot Module Reloading proved very useful for the development environment.
 
 # Requirements
