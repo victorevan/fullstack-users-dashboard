@@ -42,9 +42,19 @@ class Dashboard extends Component {
 
   handlePaginationChange = (e, { activePage }) => {
     const { loadPaginatedData } = this.props;
-    const { page } = this.state;
+    const { page, currentFilter, search } = this.state;
+    let currentQuery = {};
+    if (search.trim().length >= 3) {
+      currentQuery = {
+        filter: currentFilter,
+        filterVal: search,
+      };
+    }
     if (activePage !== page) {
-      loadPaginatedData({ page: activePage });
+      loadPaginatedData({
+        page: activePage,
+        ...currentQuery,
+      });
     }
   }
 
@@ -69,7 +79,7 @@ const mapStateToProps = ({ paginatedUsers }) => {
     };
   }
   const {
-    docs, total, /* limit, */ page, pages,
+    docs, total, limit, page, pages,
   } = paginatedUsers;
   const {
     entities, result,
@@ -79,7 +89,7 @@ const mapStateToProps = ({ paginatedUsers }) => {
     loading: false,
     users,
     total,
-    // limit,
+    limit,
     page,
     pages,
   };
