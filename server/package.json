@@ -9,7 +9,7 @@
     "test:watch": "PORT=4242 nodemon --exec \"mocha\"",
     "start": "nodemon server.js"
   },
-  "author": "UniPower",
+  "author": "Victor Evangelista",
   "license": "ISC",
   "dependencies": {
     "chance": "^1.0.16",
