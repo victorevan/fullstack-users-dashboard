@@ -14,7 +14,17 @@ const Dashboard = styled.div`
 `;
 
 const View = ({
-  changeSearch, changeFilter, changePage, loading, search, currentFilter, users, page, pages, total,
+  changeSearch,
+  changeFilter,
+  changePage,
+  loading,
+  search,
+  currentFilter,
+  users,
+  page,
+  pages,
+  total,
+  limit,
 }) => (
   <Fragment>
     {loading
@@ -34,6 +44,7 @@ const View = ({
             page={page}
             pages={pages}
             total={total}
+            limit={limit}
             changePage={changePage}
           />
         </Dashboard>
@@ -64,7 +75,7 @@ View.propTypes = {
     surveyStatus: PropTypes.string,
   })),
   total: PropTypes.number.isRequired,
-  // limit: PropTypes.number.isRequired,
+  limit: PropTypes.number.isRequired,
   page: PropTypes.number,
   pages: PropTypes.number,
 };
