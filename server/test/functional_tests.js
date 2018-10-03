@@ -11,7 +11,7 @@ chai.use(chaiHttp);
 chai.use(chaiJsonSchema);
 
 describe('Functional Tests', () => {
-  let userData, userSchema, errorSchema;
+  let userData, userSchema, paginationDataSchema, errorSchema;
 
   before(() => {
     userData = {
@@ -34,6 +34,21 @@ describe('Functional Tests', () => {
         role: { type: 'string' }
       }
     };
+    paginationDataSchema = {
+      title: 'pagination data schema',
+      type: 'object',
+      required: ['docs', 'total', 'limit', 'page', 'pages'],
+      properties: {
+        docs: {
+          type: 'array',
+          items: userSchema
+        },
+        total: { type: 'number' },
+        limit: { type: 'number' },
+        page: { type: 'number' },
+        pages: { type: 'number' }
+      }
+    };
     errorSchema = {
       title: 'error schema',
       type: 'object',
@@ -48,6 +63,38 @@ describe('Functional Tests', () => {
         }
       }
     }
+  });
+
+  // BDD style
+
+  describe('API ROUTING FOR /api/users/paginated', () => {
+    describe('GET', () => {
+      it('should get pagination data', (done) => {
+        chai.request(server)
+          .get('/api/users/paginated')
+          .end((err, { status, body }) => {
+            expect(status).to.equal(200);
+            expect(body).to.be.jsonSchema(paginationDataSchema);
+            done();
+          });
+      });
+
+      it('should handle query string searches', (done) => {
+        chai.request(server)
+          .get('/api/users/paginated')
+          .query({
+            filter: 'type',
+            filterVal: 'Employee'
+          })
+          .end((err, { status, body }) => {
+            expect(status).to.equal(200);
+            expect(body).to.be.jsonSchema(paginationDataSchema);
+            expect(body.docs[0].type).to.equal('Employee');
+            expect(body.docs[body.docs.length - 1].type).to.equal('Employee');
+            done();
+          });
+      })
+    });
   });
 
   // TDD style
